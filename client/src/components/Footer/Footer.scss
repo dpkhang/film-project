@@ -1,0 +1,32 @@
+.footer-background {
+    width: 100%;
+    height: 20rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: relative;
+    .footer {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        table {
+            width: 100%;
+            height: 100%;
+            tr {
+                width: 100%;
+                height: 17%;
+                cursor: pointer;
+                th {
+                    width: 33%;
+                    font-size: 1.5rem;
+                    font-family: Poppins;
+                }
+                td {
+                    width: 33%;
+                    text-align: center;
+                    font-family: Poppins;
+                    font-size: 1.25rem;
+                }
+            }
+        }
+    }
+}

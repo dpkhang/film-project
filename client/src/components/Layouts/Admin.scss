@@ -1,0 +1,22 @@
+@import '../../scss/color' ;
+
+.admin {
+    width: 100%;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    .admin-content {
+        width: 100%;
+        display: flex; 
+        position: relative;
+        z-index: 1;
+    }
+    .admin-background {
+        width: 15rem;
+        height: 15rem;
+        position: absolute;
+        right: -3rem;
+        bottom: -3rem;
+        clip-path: circle(50% at 50% 50%);
+    }
+}

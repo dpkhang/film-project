@@ -1,0 +1,81 @@
+@import '../../../scss/color';
+
+.main-menu {
+    width: 100%;
+    height: 5rem;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    transition: .5s;
+    .row-menu {
+        width: 100%;
+        height: 100%;
+        .row-menu-title {
+            width: 15rem;
+            height: 100%;
+            float: left;
+            font-size: 3rem;
+            margin-left: 4rem;
+            font-family: FredokaOne;
+            color: $text_color;
+            img {
+                width: 11rem;
+            }
+        }
+        ul {
+            float: right;
+            height: 100%;
+            margin-right: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > li{
+                width: 10rem;
+                height: 70%;
+                transition: .5s;
+                margin: 0 .5rem;
+                border-radius:.25rem;
+                overflow: hidden;
+                a {
+                    i{
+                        display: inline-block;
+                        font-size: 1.2rem;
+                        transform: translate(.1rem, -.25rem);
+                        color: $text_color;
+                    }
+                    font-size: 1.25rem;
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    line-height: 3.5rem;
+                    font-family: Poppins;
+                    letter-spacing: .1rem;
+                    font-weight: bolder;
+                    text-align: center;
+                    display: block;
+                    color: $text_color;
+                }
+            }
+            >li:hover {
+                background-color: $color3;
+                a {
+                    color: $color5;
+                }
+                i {
+                    color: $color5;
+                }
+            }
+            .active {
+                a {
+                    color: $color5;
+                }
+                i {
+                    color: $color5;
+                }
+            }
+        }
+    }
+}
+.main-menu-background-active {
+    background-color: $bodyColor;
+}

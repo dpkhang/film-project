@@ -1,0 +1,83 @@
+@import '../../../../scss/color';
+
+.history-item-background {
+    width: 85%;
+    margin: 2rem auto;
+    height: 17rem;
+    background-color:$color1;
+    box-shadow: 0 0 .5rem $color2;
+    border-radius: .35rem;
+    overflow: hidden;
+    .history-item {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        justify-content: space-between;
+        .image-content {
+            width: 20%;
+            height: 100%;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .text-content {
+            width: 78%;
+            height: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-content: space-around;
+            flex-direction: column;
+            .text-item-group {
+                width: 100%;
+                height: 70%;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                .text-item {
+                    width: 100%;
+                    height: 22%;
+                    font-family: Poppins;
+                    color: $textColor;
+                    font-size: 1.2rem;
+                }
+                .text-item:first-child {
+                    font-size: 1.75rem;
+                    font-weight: bold;
+                }
+            }
+            .btn-item-group {
+                width: 100%;
+                height: 25%;
+                .btn-item {
+                    float:  right;
+                    background-color: $color3;
+                    display: block;
+                    width: 9rem;
+                    height: 2.5rem;
+                    color: $textColor;
+                    font-family: Poppins;
+                    font-size: 1.25rem;
+                    font-weight: bold;
+                    margin-right: 1rem;
+                    background: linear-gradient(90deg, $color3, #58e9ff, $color5);
+                    background-size: 500% 100%;
+                    border-radius: .25rem;
+                    cursor: pointer;
+                    transition: .5s;
+                }
+
+                .btn-delete {
+                    margin-right: 3rem;
+                    color: yellow;
+                }
+                .btn-item:hover {
+                    background-position: 100%;
+                    color: $color1;
+                }
+            }
+        }
+    }
+}

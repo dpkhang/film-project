@@ -1,0 +1,9 @@
+.movies-master {
+    width: 80%;
+    margin: 0 auto;
+    .container {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+    }
+}

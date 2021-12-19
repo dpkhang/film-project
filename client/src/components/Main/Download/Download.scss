@@ -1,0 +1,53 @@
+.main-download-background {
+    width: 100%;
+    height: 40rem;
+    .main-download {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        transition: .5s;
+        .main-download-text {
+            width: 60%;
+            height: 50%;
+            transition: .5s;
+            .text {
+                width: 100%;
+                height: 70%;
+                p{
+                    font-family: Poppins;
+                    font-size: 2.5rem;
+                    text-align: center;
+                }
+                p:first-child {
+                    font-size: 3rem;
+                    font-weight: bold;
+                }
+            }
+            .img {
+                width: 100%;
+                height: 30%;
+                display: flex;
+                justify-content: center;
+                img {
+                    width: 13rem;
+                    height: 5rem;
+                    cursor: pointer;
+                }
+                .app-store {
+                    width: 15rem;
+                    height: 5.4rem;
+                }
+            }
+        }
+        .main-download-phone-image {
+            width: 40%;
+            img {
+                width: 100%;
+                
+            }
+        }
+    }
+}

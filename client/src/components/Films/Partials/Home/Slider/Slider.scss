@@ -1,0 +1,53 @@
+@import '../../../../../scss/color';
+
+@keyframes keyframe1 {
+    to {
+        color: $color1;
+    }from {
+        color: $textColor;
+    }
+}
+
+.sliders {
+    width: 90%;
+    height: 15rem;
+    margin: 0 auto;
+    position: relative;
+    .slider-choice {
+        width: 100%;
+        height: 2rem;
+        display: flex;
+        justify-content: space-between;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        z-index: 2;
+        transform: translateY(-50%);
+        >i {
+            display: inline-block;
+            cursor: pointer;
+            padding: 0 1rem;
+            font-size: 2.5rem;
+            color: $color1;
+            animation: keyframe1 1.5s linear infinite alternate;
+        }
+    }
+    .slider-index {
+        width: 100%;
+        height: 100%;
+        border-radius: 1rem;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        > img {
+            width: 100%;
+            height: 15rem;
+            opacity: 0;
+            transition: .5s;
+        }
+        .active {
+            opacity: 1;
+        }
+    }
+}

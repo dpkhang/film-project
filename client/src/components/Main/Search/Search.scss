@@ -1,0 +1,102 @@
+@import '../../../scss/color';
+
+.main-login-background {
+    width: 100%;
+    height: 100vh;
+    background:linear-gradient(
+        rgba(0, 0, 0, 0.7), 
+        rgba(0, 0, 0, 0.7)
+      ), url('../../../img/background/main-background.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow-x: hidden;
+    .blur {
+        width: 100%;
+        height: 100%;
+        backdrop-filter: blur(.15rem);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .main-login {
+        width: 60%;
+        height: 80%;
+        padding-top: 2rem;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        .main-login-text {
+            width: 100%;
+            height: 60%;
+            padding-left: 3rem;
+            .col {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                .text {
+                    width: 50rem;
+                    height: 20rem;
+                    position: absolute;
+                    top: 0;
+                    left: -70rem;
+                    transition: 1s ease-out;
+                    p {
+                        width: 100%;
+                    }
+                    p:first-child, p:nth-child(2) {
+                        font-size: 4.5rem;
+                        font-family: Poppins;
+                        font-weight: bold;
+                    }
+                    p:last-child {
+                        font-size: 2rem;
+                        font-family: Poppins;
+                    }
+                }
+                img {
+                    transition: 1s ease-out;
+                    width: 20rem;
+                    height: 20rem;
+                    position: absolute;
+                    right: -50rem;
+                    top: 0;
+                }
+            }
+        }
+        .account {
+            width: 100%;
+            height: 20%;
+            display: flex;
+            justify-content: center;
+            flex-direction: row;
+            align-items:flex-start;
+            padding-top: 0;
+            .item-btn {
+                width: 12rem;
+                height: 4rem;
+                display: block;
+                background-color: $color3;
+                font-family: Poppins;
+                line-height: 4rem;
+                text-align: center;
+                font-weight: bold;
+                font-size: 2rem;
+                margin: 0 2rem;
+                border-radius: .25rem;
+                transition: 1s;  
+                opacity: 0;
+            }
+            .item-btn:hover {
+                letter-spacing: 3px;
+                transition: letter-spacing .5s;
+            }
+            .btn-sign-up {
+                background: none;
+                border: 1px solid white;
+                color: white;
+            }
+        }
+    }
+}

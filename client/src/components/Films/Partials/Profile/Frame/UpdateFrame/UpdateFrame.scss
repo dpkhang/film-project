@@ -1,0 +1,91 @@
+@import '../../../../../../scss/color';
+
+.update-frame-background {
+    width: 30rem;
+    height: 30rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    .update-frame-title {
+        width: 100%;
+        height: 3rem;
+        font-size: 2rem;
+        font-family: Poppins;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .items {
+        width: 100%;
+        height: 3.5rem;
+        background-color: $textColor;
+        margin-bottom: 2rem;
+        border-radius: .2rem;
+        position: relative;
+        p {
+            width: 100%;
+            height: 3.5rem;
+            color: $color3;
+            line-height: 2.5rem;
+            font-family: Poppins;
+            font-weight: bold;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            top: .5rem;
+            padding-left: 1rem;
+            transition: .25s;
+            opacity: .5;
+        }
+
+        .active {
+            height: 1rem;
+            line-height: .7rem;
+            font-size: .75rem;
+            font-weight: bold;
+            opacity: 1;
+        }
+        input {
+            width: 85%;
+            height: 2rem;
+            background: none;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 1.25rem;
+            outline: none;
+            display: none;
+            color: $color3;
+            font-family: Poppins;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    }
+    .items-submit {
+        background: none;
+        display: flex;
+        justify-content: center;
+        padding-top: 2rem;
+        .btn {
+            display: inline-block;
+            position: relative;
+            width: 8rem;
+            height: 2.5rem;
+            font-size: 1.25rem;
+            margin: 0 1rem;
+            font-family: Poppins;
+            font-weight: bold;
+            border-radius: .25rem;
+            cursor: pointer;
+            background: linear-gradient(90deg, $color3, #58e9ff, $color5);
+            background-size: 500% 100%;
+            transition: 1s;
+        }
+
+        .btn:hover {
+            background-position: 100% 0;
+            color: $color3;
+        }
+    }
+}

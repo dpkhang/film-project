@@ -1,0 +1,82 @@
+@import '../../../../../../scss/color';
+
+.manage-vip-frame-background {
+    width: 40rem;
+    height: 30rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    .manage-vip-frame-title {
+        width: 100%;
+        height: 4rem;
+        font-size: 3rem;
+        font-family: Poppins;
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .items {
+        width: 100%;
+        position: relative;
+        .activated-inform {
+            color: greenyellow;
+            font-size: 1.75rem;
+        }
+        p {
+            font-size: 1.25rem;
+            font-family: Poppins;
+            font-weight: bold;
+            height: 2rem;
+            margin-bottom: 1rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            tr {
+                height: 3rem;
+               
+                th, td {
+                    font-size: 1.25rem;
+                    font-family: Poppins;
+                    border-bottom: .5px solid rgba(240, 240, 240, 0.5);
+                }
+                th {
+                    text-align: start;
+                }
+                .grant-th {
+                    width: 20%;
+                }
+                .normal-th, .master-th {
+                    width: 40%;
+                }
+
+            }
+            .submit {
+                th, td {
+                    border: none;
+                }
+                td {
+                    .btn {
+                        display: inline-block;
+                        position: relative;
+                        width: 8rem;
+                        height: 2.5rem;
+                        font-size: 1.25rem;
+                        margin-top: 1rem;
+                        font-family: Poppins;
+                        font-weight: bold;
+                        border-radius: .25rem;
+                        cursor: pointer;
+                        background: linear-gradient(90deg, $color3, #58e9ff, $color5);
+                        background-size: 500% 100%;
+                        transition: 1s;
+                    }
+            
+                    .btn:hover {
+                        background-position: 100% 0;
+                        color: $color3;
+                    }
+                }
+            }
+        }
+    }
+}

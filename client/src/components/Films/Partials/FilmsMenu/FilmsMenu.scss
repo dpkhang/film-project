@@ -1,0 +1,101 @@
+@import '../../../../scss/color';
+
+.master-films-header {
+    width: 100%;
+    height: 5rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: $bodyColor;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .master-films-left {
+        width: 30%;
+        height: 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            margin-left: 2rem;
+            background-color: $color3;
+            margin-right: 4rem;
+            cursor: pointer;
+            overflow: hidden;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .master-films-search {
+            width: 20rem;
+            height: 2.25rem;
+            background-color: $color3;
+            display: flex;
+            justify-content: center;
+            align-self: center;
+            border-radius: .25rem;
+            input {
+                width: 80%;
+                height: 100%;
+                background: none;
+                outline: none;
+                font-size: 1rem;
+                font-family: Poppins;
+                font-weight: bold;
+                display: inline-block;
+                margin-right: .5rem;
+            }
+            i{
+                font-size: 1.25rem;
+                margin-top: .5rem;
+                cursor: pointer;
+            }
+            ::placeholder { 
+                color: #ffffff;
+                opacity: .6;
+            }
+        }
+    }
+    .master-films-right {
+        width: 65%;
+        height: 5rem;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        line-height: 3rem;
+        margin: 0 auto;
+
+        > li {
+            width: 15%;
+            height: 3rem;
+            transition: .5s;
+            margin: 0 .5rem;
+            border-radius: .25rem;
+            overflow: hidden;
+            > a {
+                font-size: 1.25rem;
+                font-family: Poppins;
+                font-weight: bold;
+                display: block;
+                color: $text_color;
+                transition: .5s;
+            }
+        }
+        >li:hover {
+            background-color: $color3;
+        }
+        >li:hover a {
+            color:$color5;
+        }
+        .active {
+            a {
+                color:$color5;
+            }
+        }
+    }
+}

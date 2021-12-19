@@ -1,0 +1,101 @@
+@import '../../scss/color';
+
+.login {
+    width: 30rem;
+    height: 30rem;
+    margin: 0 auto;
+    background-color:$color1;
+    box-shadow: 0 0 .5rem $color2;
+    border-radius: 1rem;
+    form {
+        width: 100%;
+        height: 100%;
+        padding: 1rem 0;
+        >h1 {
+            width: 100%;
+            height: 6rem;
+            font-family: Poppins;
+            font-size: 4rem;
+            line-height: 6rem;
+            text-align: center;
+        }
+        .input-item {
+            width: 100%;
+            height: 14rem;
+            padding:0 4rem;
+            >p {
+                font-size: 1.25rem;
+                font-family: Poppins;
+                margin: .75rem 0;
+                margin-left: -1rem;
+            }
+            .input-element {
+                width: 100%;
+                height: 3rem;
+                i {
+                    display: inline-block;
+                    font-size: 1.75rem;
+                    height: 100%;
+                    width: 10%;
+                    transform: translateY(.25rem);
+                }
+                > input {
+                    display: inline-block;
+                    height: 2.5rem;
+                    width: 85%;
+                    margin-left: 1rem;
+                    font-family: Poppins;
+                    font-weight: bold;
+                    color: $color1;
+                    outline: none;
+                    padding: 0 1rem;
+                    border-radius:.25rem;
+                }
+            }
+        }
+        .register-question-item {
+            width: 100%;
+            height: 2rem;
+            padding:0 4rem;
+            a {
+                font-size: 1.25rem;
+                font-family: Poppins;
+                transform: translateY(-1rem);
+                margin-left: -1rem;
+                display: inline-block;
+                color: $color5;
+                transition: .25s;
+            }
+            a:hover {
+                color: $color3;
+            }
+        }
+        .input-submit {
+            width: 100%;
+            height: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .button-item {
+                width: 30%;
+                height: 3rem;
+                margin: .5rem;
+                font-family: Poppins;
+                background: linear-gradient(90deg, $color3, #58e9ff, $color5);
+                background-size: 500% 100%;
+                border-radius: .25rem;
+                display: block;
+                text-align: center;
+                line-height: 3rem;
+                font-size: 1.5rem;
+                font-weight: bold;
+                cursor: pointer;
+                transition: 1s;
+            }
+            .button-item:hover {
+                background-position: 100%;
+                color: $color1;
+            }
+        }
+    }
+}

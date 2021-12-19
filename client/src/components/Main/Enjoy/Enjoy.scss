@@ -1,0 +1,41 @@
+@import '../../../scss/color';
+
+.main-enjoy-background {
+    width: 100%;
+    height: 35rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    opacity: .2;
+    transition: .5s;
+    .main-enjoy {
+        width: 80%;
+        height: 100%;
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(-6rem);
+        transition: .5s;
+        .main-enjoy-video {
+            width: 40%;
+            overflow: hidden;
+            video {
+                width: 100%;
+                border-radius: 1rem;
+            }
+        }
+        .main-enjoy-text {
+            width: 60%;
+
+            p {
+                width: 100%;
+                margin-left: 5rem;
+                font-size:  2.5rem;
+                font-family: Poppins;
+            }
+            p:first-child {
+                font-size: 3rem;
+                font-weight: bold;
+            }
+        }
+    }
+}

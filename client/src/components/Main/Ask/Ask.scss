@@ -1,0 +1,57 @@
+@import '../../../scss/color';
+
+.main-ask-background {
+    width: 100%;
+    height: 50rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    padding-top: 7rem;
+    transition: .5s;
+    .main-ask {
+        width: 80%;
+        height: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        transition: .5s;
+        .row {
+            width: 70%;
+            p{
+                font-family: Poppins;
+                padding-left: 2rem;
+            }
+
+            .title {
+                font-size: 3rem;
+                font-weight: bold;
+                text-align: center;
+                height: 7rem;
+                padding-left: 0;
+            } 
+
+            .question {
+                font-size: 2.5rem;
+                width: 100%;
+                height: 5rem;
+                line-height: 5rem;
+                background-color: rgba(0, 0, 0, .5);
+                cursor: pointer;
+            }
+
+            .content {
+                width: 100%;
+                height: 10rem;
+                display: none;
+                margin-top: .5rem;
+                padding: .5rem;
+                .text {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+
+        .ask-question {
+            margin-bottom: .5rem;
+        }
+    }
+}
