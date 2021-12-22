@@ -8,7 +8,7 @@ interface Props {
 }
 
 function Actors(props: Props) {
-    const [typeForm, setTypeForm] = useState('add')
+    const [typeForm, setTypeForm] = useState<string>('add')
 
     const handleChangeTypeForm = (value: string) =>{
         setTypeForm(value)

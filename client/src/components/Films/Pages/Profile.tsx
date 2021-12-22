@@ -9,7 +9,7 @@ import './Profile.scss'
 function Profile(props: any) {
 
     //state
-    const [user, setUser] = useState({
+    const [user, setUser] = useState<object>({
         username: '',
         name: '',
         email: '',

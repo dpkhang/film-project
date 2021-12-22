@@ -1,6 +1,5 @@
 import React from 'react'
-import HomeTag from '../Partials/Home/Home'
-
+import './Home.scss'
 interface Props {
 
 }
@@ -8,7 +7,7 @@ interface Props {
 function Home(props: Props) {
     return (
         <div>
-            <HomeTag></HomeTag>
+
         </div>
     );
 }
