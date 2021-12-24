@@ -18,13 +18,15 @@ function Menu() {
         {
             label:['Contact '],
             to: '/contact',
-            exact:false
         },
         {
             label:['Introduce '],
             to: '/introduce',
-            exact:false
-        }
+        },
+        {
+            label:['Login '],
+            to: '/login',
+        },
     ]
 
     const handleMenuBackground = (e: any)=>{

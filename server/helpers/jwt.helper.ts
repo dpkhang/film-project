@@ -9,19 +9,19 @@ interface Payload {
     email?: string
 }
 
-const createToken = (payload: Payload) =>{
+const createToken = (payload: Payload, expiresIn: string) =>{
     try {
         const {id, username}= payload
-        const accessToken = jwt.sign({id, username}, process.env.ACCESS_TOKEN_SECRET as string, {expiresIn: "2h"})
+        const accessToken = jwt.sign({id, username}, process.env.ACCESS_TOKEN_SECRET as string, {expiresIn: expiresIn})
         return accessToken
     }catch(err){
         console.log(err)
     }
 }
 
-const verifyToken = (token: string, key: string) =>{
+const verifyToken = (token: string, key: string, expiresIn: string) =>{
     try {
-        const decode:any = jwt.verify(token, key, {expiresIn: "2h"} as jwt.VerifyOptions)
+        const decode:any = jwt.verify(token, key, {expiresIn: expiresIn} as jwt.VerifyOptions)
         const user: Payload = {
             id: decode.id,
             username: decode.username

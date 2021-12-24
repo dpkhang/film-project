@@ -68,35 +68,42 @@
         .account {
             width: 100%;
             height: 20%;
-            display: flex;
-            justify-content: center;
-            flex-direction: row;
-            align-items:flex-start;
             padding-top: 0;
-            .item-btn {
-                width: 12rem;
-                height: 4rem;
-                display: block;
-                background-color: $color3;
-                font-family: Poppins;
-                line-height: 4rem;
-                text-align: center;
-                font-weight: bold;
-                font-size: 2rem;
-                margin: 0 2rem;
-                border-radius: .25rem;
-                transition: 1s;  
-                opacity: 0;
-            }
-            .item-btn:hover {
-                letter-spacing: 3px;
-                transition: letter-spacing .5s;
-            }
-            .btn-sign-up {
-                background: none;
-                border: 1px solid white;
-                color: white;
+            form {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                align-items:flex-start;
+                input[type="text"] {
+                    width: 80%;
+                    height: 50%;
+                    color: $color3;
+                    padding-left: 2rem;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    font-family: Poppins;
+                    outline-color: $color3;
+                    border-radius: .25rem;
+                }
+                input[type="submit"] {
+                    width: 18%;
+                    height: 50%;
+                    border-radius: .25rem;
+                    font-size: 1.5rem;
+                    font-family: Poppins;
+                    font-weight: bold;
+                    background-color: $color3;
+                    cursor: pointer;
+                }
+                input::placeholder {
+                    font-family: Poppins;
+                    font-size: 1.25rem;
+                    color: rgba($color3, .5);
+                }
             }
         }
     }
 }
+

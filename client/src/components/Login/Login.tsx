@@ -96,7 +96,7 @@ const Login=()=> {
                 </div>
                 </div>
                 <div className='register-question-item'>
-                    <Link to='/register'>Register</Link>
+                    <Link to='/'>Register</Link>
                 </div>
                 <div className='input-submit'>
                 <input className='button-item' type='submit' value='Login'/>

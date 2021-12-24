@@ -8,10 +8,11 @@ function Register(props:any) {
     const cookies = new Cookies()
 
     useEffect(()=>{
-        if(cookies.get('accessToken') && cookies.get('uid').match(/-u$/i))
-            navigate('/films')
-        else
-            navigate('/admin')
+        if(cookies.get('accessToken')) 
+            if(cookies.get('uid').match(/-u$/i))
+                navigate('/films')
+            else
+                navigate('/admin')
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     

@@ -1,14 +1,23 @@
+import { NextFunction, Response, Request } from 'express'
 import jwt from 'jsonwebtoken'
 import  JWTHelper from '../helpers/jwt.helper'
+declare global {
+    namespace Express {
+        interface Request {
+            user: object
+        }
+    }
+}
 
-const authToken = (req: any, res: any, next: any): void => {
-    const authTokenHeader: string = req.headers.authorization
-    const token: string = authTokenHeader && authTokenHeader.split(' ')[1]
+const authToken = (req: Request, res: Response, next: NextFunction) => {
+    const authTokenHeader = req.headers.authorization
+    const token = authTokenHeader && authTokenHeader.split(' ')[1]
     if(!token) {
         return res.sendStatus(404)
     }
+
     try {
-        const decode = JWTHelper.verifyToken(token, process.env.ACCESS_TOKEN_SECRET as string)
+        const decode = JWTHelper.verifyToken(token, process.env.ACCESS_TOKEN_SECRET as string, "2h")
         if(!decode) {
             console.log(decode)
             return res.status(200).json({
@@ -16,11 +25,15 @@ const authToken = (req: any, res: any, next: any): void => {
                 verify: 0
             })
         }
-        req.user = decode
+        req.user  = decode as object
         next()
     }catch(err) {
         console.error(err)  
     }
+}
+
+const authTokenRegister = (req: Request, res: Response, next: NextFunction) => {
+
 }
 
 export = {
