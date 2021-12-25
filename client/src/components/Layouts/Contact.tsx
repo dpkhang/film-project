@@ -2,10 +2,12 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { saveUser } from '../../redux/actions/user';
 import ContactTag from '../Contact/Contact'
-import { useNavigate } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+// import { useNavigate } from 'react-router-dom'
+// import {useCookies} from 'react-cookie'
 
 function Contact(props: any) {
+
+    //cookies 
 
     const user = useSelector((state:any)=>state.user.data)
     const dispatch = useDispatch()
@@ -20,11 +22,6 @@ function Contact(props: any) {
         dispatch(action)
         console.log(user)
     }
-
-
-    const navigate = useNavigate()
-    if(new Cookies().get('accessToken'))
-        navigate('/films')
 
     return (
         <>

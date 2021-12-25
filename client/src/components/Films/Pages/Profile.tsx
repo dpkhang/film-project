@@ -2,11 +2,14 @@ import React, {useState, useEffect} from 'react'
 import UpdateProfile from '../Partials/Profile/UpdateProfile/UpdateProfile'
 import Frame from '../Partials/Profile/Frame/Frame'
 import {useNavigate} from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import {useCookies} from 'react-cookie'
 import {getUserById} from '../../../API/ConnectAPI'
 import './Profile.scss'
 
 function Profile(props: any) {
+    //cookies
+
+    const [cookies,, removeCookies] = useCookies(['uid', 'accessToken'])
 
     //state
     const [user, setUser] = useState<object>({
@@ -23,14 +26,12 @@ function Profile(props: any) {
 
     //hook
     const navigate = useNavigate()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const cookies = new Cookies()
 
 
     useEffect(()=>{
         (async function(){
             try {
-                const uid = cookies.get('uid')
+                const uid = cookies.uid
                 if(uid){
                     const result: any = await getUserById(uid)
                     if(result.res.status === 200){
@@ -46,13 +47,13 @@ function Profile(props: any) {
                         setUser(mergeUser)
                     }
                 }else {
-                    cookies.remove('accessToken')
+                    removeCookies('accessToken')
                     navigate('/')
                 }
             }catch(err){
                 console.log(err)
                 alert('This page is failed!')
-                cookies.remove('accessToken')
+                removeCookies('accessToken')
                 navigate('/')
             }
         })()

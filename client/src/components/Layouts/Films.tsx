@@ -6,10 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import routes from '../../routes/CustomerRoute'
 import MapRoute from '../RouterConfig/MapRoute'
 import { useSelector } from 'react-redux'
-import Cookies from 'universal-cookie'
+import { useCookies } from 'react-cookie'
 import { checkTimeOutToken } from '../../API/ConnectAPI'
 
 function Films(props: any) {
+    //cookies
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [cookies, setCookies, removeCookies] = useCookies(['uid', 'accessToken'])
 
     //states
     const [left, setLeft] = useState('-30rem')
@@ -31,14 +35,13 @@ function Films(props: any) {
     }
 
     const navigate = useNavigate()
-    const cookies = new Cookies()
     useEffect(()=>{
             (async function() {
-                const checkToken = await checkTimeOutToken(cookies.get('accessToken'))
+                const checkToken = await checkTimeOutToken(cookies.accessToken)
                 console.log(checkToken)
                 if(checkToken && checkToken.res.data.verify === 0) {
-                    cookies.remove('accessToken')
-                    cookies.remove('uid')
+                    removeCookies('uid')
+                    removeCookies('accessToken')
                     navigate('/')
                 }
             })()

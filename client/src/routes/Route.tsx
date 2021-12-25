@@ -26,7 +26,7 @@ const routes = [
         component: ()=> <Introduce/>
     },
     {
-        path: '/register',
+        path: '/register/:token',
         component: ()=> <Register/>,
     },
     {

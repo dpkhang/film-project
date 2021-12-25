@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react'
 import RegisterTag from '../Register/Register'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import {useCookies} from 'react-cookie'
 
 function Register(props:any) {
+    //cookies 
+    const[cookies] = useCookies(['uid', 'accessToken'])
+    
     const navigate = useNavigate()
-    const cookies = new Cookies()
+    
 
     useEffect(()=>{
-        if(cookies.get('accessToken')) 
-            if(cookies.get('uid').match(/-u$/i))
+        if(cookies.accessToken) 
+            if(cookies.uid.match(/-u$/i))
                 navigate('/films')
             else
                 navigate('/admin')

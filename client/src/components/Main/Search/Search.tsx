@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import './Search.scss'
 import $ from 'jquery'
 import Dialog from '../../Dialog/Alert'
-import { registerAPI } from '../../../API/ConnectAPI'
+import { verifyEmail } from '../../../API/ConnectAPI'
 import Loading from '../../Loading/Loading';
 
 Search.propTypes = {
@@ -45,7 +45,7 @@ function Search() {
         e.preventDefault()
         try {
             setIsTimeout(false)
-            const result = await registerAPI({email: email})
+            const result = await verifyEmail({email: email})
             if(result && result.res.status === 200){
                 setIsTimeout(result.timeout)
             }

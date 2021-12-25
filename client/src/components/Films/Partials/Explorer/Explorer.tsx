@@ -1,7 +1,7 @@
 import React, { } from 'react'
 import PropTypes from 'prop-types'
 import {Link} from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import {useCookies} from 'react-cookie'
 import './Explorer.scss'
 Explorer.propTypes = {
     left: PropTypes.string,
@@ -9,6 +9,10 @@ Explorer.propTypes = {
 };
 
 function Explorer(props: any) {
+
+    //cookies
+    const [,, removeCookies] = useCookies(['uid', 'accessToken'])
+
     //props
     const { left , onHideExplorer} = props
 
@@ -21,9 +25,8 @@ function Explorer(props: any) {
     }
 
     const handleLogout = (e: any)=>{
-        const cookies= new Cookies()
-        cookies.remove('accessToken')
-        cookies.remove('uid')
+        removeCookies('uid', {path: '/'})
+        removeCookies('accessToken', {path: '/'})
     }
 
     return (

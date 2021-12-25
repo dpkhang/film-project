@@ -7,28 +7,26 @@ import Story from '../Main/Story/Story'
 import Enjoy from '../Main/Enjoy/Enjoy'
 import Menu from '../Main/Menu/Menu'
 import Footer from '../Footer/Footer'
-import Cookies from 'universal-cookie'
+import {useCookies} from 'react-cookie'
 import $ from 'jquery'
 import { useNavigate } from 'react-router'
 
 const Main= () =>{
 
+    //cookies
+    const [cookies] = useCookies(['uid', 'accessToken'])
 
     const navigate = useNavigate()
-    const cookies = new Cookies()
+
     useEffect(()=>{
         document.title = 'Hippo Movies'
         $(window).scrollTop(0)
-        if(cookies.get('accessToken'))
-            if(cookies.get('uid').match(/-u$/i))
+        if(cookies.accessToken)
+            if(cookies.uid.match(/-u$/i))
                 navigate('/films')
-            else {
+            else
                 navigate('/admin')
-            }
     }, [])
-
-
-
 
     return (
         <div style={{  backgroundColor: '#171925', position:'relative', zIndex: '1'}}>   

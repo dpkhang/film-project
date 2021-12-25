@@ -5,11 +5,14 @@ import App from './App';
 import { Provider } from 'react-redux'
 import reportWebVitals from './reportWebVitals';
 import store from './redux/store'
+import {CookiesProvider} from 'react-cookie'
 
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
-      <App/>
+      <CookiesProvider>
+        <App/>
+      </CookiesProvider>
     </React.StrictMode>
   </Provider>,
   document.getElementById('root')

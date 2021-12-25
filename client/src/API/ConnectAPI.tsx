@@ -21,8 +21,13 @@ const loginAPI = async (data: object)=>{
     return res
 }
 
-const registerAPI = async (data: object)=>{
-    const res = await connectAPI('post', '/auth/register', data)
+const registerAPI = async (data: object, token: string)=>{
+    const res = await connectAPI('post', '/auth/register', data, token)
+    return res
+}
+
+const verifyEmail = async (data: object) => {
+    const res = await connectAPI('post', '/auth/verify-email', data)
     return res
 }
 
@@ -49,6 +54,7 @@ const checkTimeOutToken = async (token: string='', data: object={})=>{
 export {
     loginAPI,
     registerAPI,
+    verifyEmail,
     putUser,
     getUserByUsername,
     getUserById,

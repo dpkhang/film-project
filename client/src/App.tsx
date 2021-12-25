@@ -7,11 +7,11 @@ import routes from './routes/Route'
 function App() {
   
   return (
-    <Router>
-      <div className="App">
-        <MapRoute routes={routes}/> 
-      </div>
-    </Router>
+      <Router>
+        <div className="App">
+          <MapRoute routes={routes}/> 
+        </div>
+      </Router>
   );
 }
 

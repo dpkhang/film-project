@@ -2,19 +2,23 @@
 import React, { useEffect } from 'react'
 import LoginTag from '../Login/Login'
 import { useNavigate } from 'react-router-dom'
-import Cookies from 'universal-cookie'
+import {useCookies} from 'react-cookie'
 
 interface Props{
 
 }
 
 function Login(props: Props) {
-    const cookies = new Cookies()
+    //cookies
+
+    const [cookies] = useCookies(['uid', 'accessToken'])
+    
+    //history
     const navigate = useNavigate()
 
     useEffect(()=>{
-        if(cookies.get('accessToken')){
-            if(cookies.get('uid').match(/-u$/i))
+        if(cookies.accessToken){
+            if(cookies.uid.match(/-u$/i))
                 navigate('/films')
             else 
                 navigate('/admin')
