@@ -8,7 +8,6 @@ import dotenv from 'dotenv'
 dotenv.config()
 interface User {
     id: string,
-    username: string, 
     password: string,
     email?: string,
     token?: string
@@ -17,12 +16,10 @@ interface User {
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const {username, password} = req.body as User
-        console.log(username, password)
-        if(!username || !password)
+        const {email, password} = req.body as User
+        if(!email || !password)
             return res.sendStatus(404)
-        let user = await UserModel.login(username, password)
-        console.log(user)
+        let user = await UserModel.login(email, password)
         const token = JWTHelper.createToken(user, "2h")
         delete user.password
         return res.status(200).json({
@@ -43,15 +40,17 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const register = async (req: Request, res: Response) => {
     try {
-        const {id, username, password, email} = req.body as User
-        if(!id || !username || !password || !email)
-            return res.sendStatus(400)
+        const {id,password} = req.body as User
+        const {email} = req.user as User
+        if(!id ||!password || !email)
+            return res.sendStatus(403)
         const user: object  = {
-            id, username, password, email
+            id, password, email
         }
         const result: any = await UserModel.register(user)
-        const token = JWTHelper.createToken({username, password, email}, "2h")
+        const token = JWTHelper.createToken({id, password, email}, "2h")
         delete result.password
+        console.log(token)
         return res.status(200).json({
             message: 'Register successfully!',
             data: {
@@ -70,11 +69,18 @@ const register = async (req: Request, res: Response) => {
 
 const verifyWithMailer = async (req: Request, res: Response)=>{
    try {
+        const {email} = req.body
+
+        if(!email) return res.sendStatus(404)
+
+        const tokenRegister = JWTHelper.createToken({email: email}, '15m')
+
         const oAuth2Option = {
             clientId: process.env.GMAIL_API_CLIENT_ID, 
             clientSecret: process.env.GMAIL_API_CLIENT_SECRET, 
             redirectUri: process.env.GMAIL_API_REDIRECT_URI
         }
+
         const oAuth2Client = new google.auth.OAuth2(oAuth2Option)
         oAuth2Client.setCredentials({refresh_token: process.env.GMAIL_API_REFRESH_TOKEN})
         const accessToken = await oAuth2Client.getAccessToken()
@@ -93,7 +99,7 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
 
         let info = await transporter.sendMail({
             from: 'khangphuc1@gmail.com',
-            to: req.body.email,
+            to: email,
             subject: 'Confirm your account on Hippo Movies',
             html: ` <h2>Confirm your account on Hippo Movies!</h2>
                     <p style="font-size: 17px">Hi!</p>
@@ -109,7 +115,7 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
                                 text-align: center; 
                                 line-height: 45px; 
                                 text-decoration: none;" 
-                            href="http://localhost:3000/login">
+                            href="http://localhost:3000/register/${tokenRegister}">
                             Verify Email!
                         </a>
                     </p>`

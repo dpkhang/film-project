@@ -1,9 +1,9 @@
 import  { conn } from '../config/database/mysql.config'
 
-const login = (username:string, password:string): Promise<any> => {
+const login = (email:string, password:string): Promise<any> => {
     return new Promise((resolve, reject) => {
-        const query  = 'select * from users where username =  ? and password = ?'
-        conn.query(query, [username, password], (err, result)=>{
+        const query  = 'select * from users where email =  ? and password = ?'
+        conn.query(query, [email, password], (err, result)=>{
             if(err) {
                 reject(err)
             }
