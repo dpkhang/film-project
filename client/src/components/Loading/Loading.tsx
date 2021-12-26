@@ -9,7 +9,7 @@ function Loading(props: Props) {
     return (
         <div className="loading-background">
             <svg className="loading-data">
-                <circle r="40" cx="50%" cy="50%"/>
+                <circle r="2rem" cx="50%" cy="50%"/>
             </svg>
         </div>
     )

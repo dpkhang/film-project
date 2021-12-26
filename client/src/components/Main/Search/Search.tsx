@@ -4,6 +4,7 @@ import $ from 'jquery'
 import Dialog from '../../Dialog/Alert'
 import { verifyEmail } from '../../../API/ConnectAPI'
 import Loading from '../../Loading/Loading';
+import { useNavigate } from 'react-router-dom'
 
 Search.propTypes = {
     
@@ -15,14 +16,16 @@ function Search() {
     //state
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [email, setEmail] = useState('')
-    
+
     const [dialog, setDialog] = useState({
         children: '',
         active: 0
     })
 
     const [isTimeout, setIsTimeout] = useState(true)
+
     //hook
+    const navigate = useNavigate()
 
     useEffect(()=>{
         setTimeout(()=>{
@@ -48,6 +51,17 @@ function Search() {
             const result = await verifyEmail({email: email})
             if(result && result.res.status === 200){
                 setIsTimeout(result.timeout)
+                if(result.res.data.check === 0) {
+                    setDialog({
+                        children: result.res.data.message,
+                        active: 1  
+                    })
+                }
+                else{
+                    navigate('/login', {
+                        state: email
+                    })
+                }      
             }
         }catch(err) {
             setDialog({
@@ -83,8 +97,8 @@ function Search() {
                     </div>
                     <div className='main-login account'>
                         <form onSubmit={handleSubmit}>
-                            <input type="text" name="email" onChange={handleChange} required placeholder="Please, Enter the email to sign up!"/>
-                            <input type="submit" value="Send" />
+                            <input type="text" name="email" onChange={handleChange} required placeholder="Please, enter the email to sign in!"/>
+                            <input type="submit" value="Sign in" />
                         </form>
                     </div>
                 </div>

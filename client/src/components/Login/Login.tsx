@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {Link, useNavigate, useLocation} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import './Login.scss'
 import { useDispatch, useSelector } from 'react-redux'
@@ -10,16 +10,18 @@ import Dialog from '../Dialog/Alert'
 const Login=()=> {
 
     //cookies
-
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [cookies, setCookies] = useCookies(['accessToken', 'uid'])
 
-    //state
+    //hooks
+    const navigate = useNavigate()
+    const location = useLocation()
+
+    //states
     const [user, setUser] = useState({
-        email: '',
+        email: location.state ? location.state as string : '',
         password: '',
     })
-
     const [dialog, setDialog] = useState({
         active: 0,
         children: ''
@@ -28,8 +30,12 @@ const Login=()=> {
     //redux
     const selector = useSelector((state:any)=>state.user.data)
     const dispatch = useDispatch()
-    //local
-    const navigate = useNavigate()
+
+    //hooks
+    useEffect(() => {
+        document.title = 'Login | Hippo Movies'
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     //handle
     const handleChange = (e: any)=>{
@@ -41,6 +47,7 @@ const Login=()=> {
         setUser(mergeUser)
     }
 
+
     const handleChangeActive = (active: number)=>{
         const state = {
             ...dialog,
@@ -49,6 +56,7 @@ const Login=()=> {
         setDialog(state)
     }
 
+
     const handleSubmit = async (e: any)=>{
         try {
             e.preventDefault()
@@ -56,10 +64,10 @@ const Login=()=> {
             if(result && result.res.status === 200) {
                 const action = saveUser(result.res.data.data)
                 setCookies("accessToken", result.res.data.data.token, {path:'/'})
-                setCookies('uid', result.res.data.data[0].id, {path:'/'})
+                setCookies('uid', result.res.data.data.id, {path:'/'})
                 console.log(selector)
                 dispatch(action)
-                if(result.res.data.data[0].permission === 'admin')
+                if(result.res.data.data.permission === 'admin')
                     navigate('/admin')
                 else {
                     navigate ('/films')
@@ -79,10 +87,6 @@ const Login=()=> {
         }
     }
 
-    useEffect(() => {
-        document.title = 'Login | Hippo Movies'
-    }, [])
-
     return (
         <div className='login'>
             <Dialog onChangeActive={handleChangeActive} active={dialog.active}>{dialog.children}</Dialog>
@@ -92,7 +96,7 @@ const Login=()=> {
                 <p>Email:</p>
                 <div className='input-element'>
                     <i className="fas fa-user"></i>
-                    <input type='text' id='username' name='email' onChange={handleChange}/>
+                    <input type='text' id='username' name='email' value={user.email} onChange={handleChange}/>
                 </div>
                 <p>Password:</p>
                 <div className='input-element'>

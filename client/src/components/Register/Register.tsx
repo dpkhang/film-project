@@ -31,6 +31,7 @@ function Register() {
     const err_confirm_password: any = useRef(null)
 
     //redux
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const selector = useSelector((state:any)=>state.user.data)
     const dispatch = useDispatch()
 
@@ -104,30 +105,33 @@ function Register() {
             if(validSubmit){
                 const mergeUser = {
                     ...user,
+                    permission: 'user',
                     id: uniqid() + '-' + Math.round(Math.random() * 10000) + '-' + uniqid() + '-' + Math.round(Math.random() * 10000) + '-u',
                 }
-                console.log(mergeUser)
                 const result: any = await registerAPI(mergeUser, params.token as string)
-                console.log(result)
                 if(result && result.res.status === 200){
-                    console.log(result.res.data.verify)
-                    if(result.res.data.verify && result.res.data.verify !== 0){
-                        console.log(result)
-                        setCookies('uid', result.res.data.data.id, {path:'/'})
-                        setCookies('accessToken', result.res.data.data.token, {path: '/'})
-                        const action = saveUser(result.res.data.data)
-                        dispatch(action)
+                    if(result.res.data.check) {
                         setAlert({
-                            children: result.res.data.data.message,
+                            children: result.res.data.message,
                             active: 1
                         })
-                        navigate('/films')
-                        console.log(selector)
-                    } else {
-                        setAlert({
-                            children: 'Register unsuccessfully!',
-                            active: 1
-                        })
+                    }else {
+                        if(!result.res.data.verify){
+                            setCookies('uid', result.res.data.data.id, {path:'/'})
+                            setCookies('accessToken', result.res.data.data.token, {path: '/'})
+                            const action = saveUser(result.res.data.data)
+                            dispatch(action)
+                            setAlert({
+                                children: result.res.data.data.message,
+                                active: 1
+                            })
+                            navigate('/films')
+                        } else {
+                            setAlert({
+                                children: 'Register unsuccessfully!',
+                                active: 1
+                            })
+                        }
                     }
                 }
                 else{

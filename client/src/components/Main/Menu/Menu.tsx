@@ -22,11 +22,7 @@ function Menu() {
         {
             label:['Introduce '],
             to: '/introduce',
-        },
-        {
-            label:['Login '],
-            to: '/login',
-        },
+        }
     ]
 
     const handleMenuBackground = (e: any)=>{

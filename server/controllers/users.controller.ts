@@ -1,4 +1,5 @@
 import {Request, Response, NextFunction} from 'express'
+import bcrypt from 'bcrypt'
 import nodemailer from 'nodemailer'
 import {google} from 'googleapis'
 import UserModel from '../models/users.model'
@@ -19,16 +20,19 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
         const {email, password} = req.body as User
         if(!email || !password)
             return res.sendStatus(404)
-        let user = await UserModel.login(email, password)
-        const token = JWTHelper.createToken(user, "2h")
-        delete user.password
-        return res.status(200).json({
-            message: 'Login successfully',
-            data: {
-                ...user,
-                token
-            }
-        })
+        let user = await UserModel.findByEmail(email)
+        if(user && await bcrypt.compare(password, user.password)) {
+            console.log(user)
+            const token = JWTHelper.createToken(user, "2h")
+            delete user.password
+            return res.status(200).json({
+                message: 'Login successfully',
+                data: {
+                    ...user,
+                    token
+                }
+            })
+        }
     }catch(err) {
         console.log(err)
         return res.status(500).json({
@@ -47,6 +51,12 @@ const register = async (req: Request, res: Response) => {
         const user: object  = {
             id, password, email
         }
+        const checkEmail = await UserModel.findByEmail(email)
+        if(checkEmail) 
+            return res.status(200).json({
+                message: 'Email was signed up!',
+                check: 1
+            })
         const result: any = await UserModel.register(user)
         const token = JWTHelper.createToken({id, password, email}, "2h")
         delete result.password
@@ -72,6 +82,12 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
         const {email} = req.body
 
         if(!email) return res.sendStatus(404)
+
+        const checkEmail = await UserModel.findByEmail(email)
+        if(checkEmail) return res.status(200).json({
+            message: 'Email was signed up!',
+            check: 1
+        })
 
         const tokenRegister = JWTHelper.createToken({email: email}, '15m')
 
@@ -124,7 +140,8 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
         console.log("Message sent: %s", info.accepted)
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info))
         return res.status(200).json({
-            message: 'verify email successfully!',
+            message: 'Checking your email, please!',
+            check: 0
         })
    }catch(err) {
        res.status(500).json({
@@ -173,7 +190,7 @@ const find = async (req: Request, res: Response) => {
         if(!username && !uid)
             res.sendStatus(404)
         if(username)
-            result = await UserModel.findByUsername(username)
+            result = await UserModel.findByEmail(username)
         if(uid) 
             result = await UserModel.findById(uid)
         if(result) {

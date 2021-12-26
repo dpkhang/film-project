@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import { checkTimeOutToken } from '../../API/ConnectAPI'
 
+
 function Films(props: any) {
     //cookies
 
@@ -37,13 +38,20 @@ function Films(props: any) {
     const navigate = useNavigate()
     useEffect(()=>{
             (async function() {
-                const checkToken = await checkTimeOutToken(cookies.accessToken)
-                console.log(checkToken)
-                if(checkToken && checkToken.res.data.verify === 0) {
+                if(cookies.accessToken){
+                    const checkToken = await checkTimeOutToken(cookies.accessToken)
+                    console.log(checkToken)
+                    if(checkToken && checkToken.res.data.verify === 0) {
+                        removeCookies('uid')
+                        removeCookies('accessToken')
+                        navigate('/')
+                    }
+                }else{
                     removeCookies('uid')
-                    removeCookies('accessToken')
-                    navigate('/')
+                        removeCookies('accessToken')
+                        navigate('/')
                 }
+
             })()
         return ()=>{
             
