@@ -19,13 +19,13 @@ function Films(props: any) {
     //states
     const [left, setLeft] = useState('-30rem')
 
-    const userSelector = useSelector((state: any)=>state.user.data)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const selector = useSelector((state: any)=>state.user.data)
 
     
     useEffect(()=>{
         document.title = 'Film | Hippo Movies'
-        console.log(userSelector)
-    }, [userSelector])
+    }, [])
 
     const handleShowExplorer = ()=>{
         setLeft('0rem')
@@ -40,7 +40,6 @@ function Films(props: any) {
             (async function() {
                 if(cookies.accessToken){
                     const checkToken = await checkTimeOutToken(cookies.accessToken)
-                    console.log(checkToken)
                     if(checkToken && checkToken.res.data.verify === 0) {
                         removeCookies('uid')
                         removeCookies('accessToken')

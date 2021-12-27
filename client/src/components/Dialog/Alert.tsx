@@ -3,15 +3,19 @@ import React, { useEffect } from 'react'
 import $ from 'jquery'
 import './Dialog.scss'
 import './Dialog.scss'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
     onChangeActive: (active: number) => void, 
     active: number, 
-    children: string
+    children: string,
+    path?: string
 }
 
-const Alert = ({onChangeActive, active, children}: Props) => {
+const Alert = ({onChangeActive, active, children, path}: Props) => {
     //hooks
+
+    const navigate = useNavigate()
     
     useEffect(()=>{
         if(active) {
@@ -34,6 +38,8 @@ const Alert = ({onChangeActive, active, children}: Props) => {
     const handleSubmit = async (e: React.FormEvent)=>{
         e.preventDefault()
         onChangeActive(0)
+        if(path)
+            navigate(path)
     }
 
     return (

@@ -91,17 +91,17 @@ const Login=()=> {
         <div className='login'>
             <Dialog onChangeActive={handleChangeActive} active={dialog.active}>{dialog.children}</Dialog>
             <form onSubmit={handleSubmit}>
-                <h1>LOGIN</h1>
+                <h1>SIGN IN</h1>
                 <div className='input-item'>
                 <p>Email:</p>
                 <div className='input-element'>
                     <i className="fas fa-user"></i>
-                    <input type='text' id='username' name='email' value={user.email} onChange={handleChange}/>
+                    <input type='text' id='username' name='email' value={user.email} required onChange={handleChange}/>
                 </div>
                 <p>Password:</p>
                 <div className='input-element'>
                     <i className="fas fa-lock"></i>
-                    <input type='password' id='password' name='password' onChange={handleChange}/>
+                    <input type='password' id='password' name='password' required onChange={handleChange}/>
                 </div>
                 </div>
                 <div className='register-question-item'>

@@ -11,7 +11,8 @@ interface User {
     id: string,
     password: string,
     email?: string,
-    token?: string
+    token?: string,
+    permission?: string
 }
 
 
@@ -19,10 +20,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const {email, password} = req.body as User
         if(!email || !password)
-            return res.sendStatus(404)
+            return res.sendStatus(400)
         let user = await UserModel.findByEmail(email)
         if(user && await bcrypt.compare(password, user.password)) {
-            console.log(user)
             const token = JWTHelper.createToken(user, "2h")
             delete user.password
             return res.status(200).json({
@@ -32,6 +32,8 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
                     token
                 }
             })
+        }else{
+            return res.sendStatus(400)
         }
     }catch(err) {
         console.log(err)
@@ -44,12 +46,12 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const register = async (req: Request, res: Response) => {
     try {
-        const {id,password} = req.body as User
+        const {id,password, permission} = req.body as User
         const {email} = req.user as User
         if(!id ||!password || !email)
-            return res.sendStatus(403)
-        const user: object  = {
-            id, password, email
+            return res.sendStatus(400)
+        const user = {
+            id, password, email, permission
         }
         const checkEmail = await UserModel.findByEmail(email)
         if(checkEmail) 
@@ -117,24 +119,28 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
             from: 'khangphuc1@gmail.com',
             to: email,
             subject: 'Confirm your account on Hippo Movies',
-            html: ` <h2>Confirm your account on Hippo Movies!</h2>
-                    <p style="font-size: 17px">Hi!</p>
-                    <p style="font-size: 17px">Please, verify your email!</p>
-                    <p>
-                        <a  style="
-                                display: block;
-                                width: 150px; 
-                                height: 45px; 
-                                background-color: blue; 
-                                color: white; 
-                                font-size: 18px; 
-                                text-align: center; 
-                                line-height: 45px; 
-                                text-decoration: none;" 
-                            href="http://localhost:3000/register/${tokenRegister}">
-                            Verify Email!
-                        </a>
-                    </p>`
+            html: ` <form style="padding: 0 20px; width: 600px; height: 300px; margin: 0 auto; border: 1px solid lightgrey; border-radius: 10px;">
+                        <h1 style="margin-bottom: 15px; width: 100%; color: #9c2ec4; text-align: center;">HIPPO MOVIES</h1>
+                        <h3 style="color: grey; font-size: 17px;">Confirm your account on Hippo Movies!</h3>
+                        <p style="font-size: 17px; width: 100%; color: grey">Hi!</p>
+                        <p style="font-size: 17px; width: 100%; color: grey; text-align: justify;">Thank for registering for your account on Hippo. Before we get started, we need to confirm this is you. Click below to confirm email:</p>
+                        <p style="margin-top: 10px;">
+                            <a  style="
+                                    display: block;
+                                    width: 150px; 
+                                    height: 35px; 
+                                    background-color: blue; 
+                                    color: white; 
+                                    font-size: 17px; 
+                                    text-align: center; 
+                                    line-height: 35px; 
+                                    border-radius: 4px;
+                                    text-decoration: none;" 
+                                href="http://localhost:3000/register/${tokenRegister}">
+                                Confirm!
+                            </a>
+                        </p>
+                    </form>`
         })
 
         console.log("Message sent: %s", info.accepted)
