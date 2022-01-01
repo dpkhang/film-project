@@ -46,7 +46,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
 const register = async (req: Request, res: Response) => {
     try {
-        const {id,password, permission} = req.body as User
+        const {id, password, permission} = req.body as User
         const {email} = req.user as User
         if(!id ||!password || !email)
             return res.sendStatus(400)
@@ -62,14 +62,13 @@ const register = async (req: Request, res: Response) => {
         const result: any = await UserModel.register(user)
         const token = JWTHelper.createToken({id, password, email}, "2h")
         delete result.password
-        console.log(token)
         return res.status(200).json({
             message: 'Register successfully!',
             data: {
                 ...result,
                 token
             }
-        } as {message: string, data: object})
+        })
     }catch (err) {
         console.log(err)
         return res.status(500).json({
@@ -125,7 +124,7 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
                         <p style="font-size: 17px; width: 100%; color: grey">Hi!</p>
                         <p style="font-size: 17px; width: 100%; color: grey; text-align: justify;">Thank for registering for your account on Hippo. Before we get started, we need to confirm this is you. Click below to confirm email:</p>
                         <p style="margin-top: 10px;">
-                            <a  style="
+                            <a id="click-to-verify"  style="
                                     display: block;
                                     width: 150px; 
                                     height: 35px; 
@@ -140,7 +139,8 @@ const verifyWithMailer = async (req: Request, res: Response)=>{
                                 Confirm!
                             </a>
                         </p>
-                    </form>`
+                    </form>
+                    `
         })
 
         console.log("Message sent: %s", info.accepted)

@@ -3,7 +3,7 @@ import {Link, useNavigate, useLocation} from 'react-router-dom'
 import { useCookies } from 'react-cookie'
 import './Login.scss'
 import { useDispatch, useSelector } from 'react-redux'
-import { loginAPI } from '../../API/ConnectAPI'
+import { loginAPI } from '../../API/AxiosAPI'
 import { saveUser } from '../../redux/actions/user'
 import Dialog from '../Dialog/Alert'
 

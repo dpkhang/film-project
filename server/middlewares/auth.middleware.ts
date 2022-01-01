@@ -48,7 +48,7 @@ const authTokenRegister = (req: Request, res: Response, next: NextFunction) => {
                 verify: 0
             })
         }
-        req.user  = decode as object
+        req.user  = decode as object //{email: email}
         next()
     }catch(err) {
         console.error(err)  

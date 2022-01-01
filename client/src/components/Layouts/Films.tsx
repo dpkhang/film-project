@@ -7,7 +7,7 @@ import routes from '../../routes/CustomerRoute'
 import MapRoute from '../RouterConfig/MapRoute'
 import { useSelector } from 'react-redux'
 import { useCookies } from 'react-cookie'
-import { checkTimeOutToken } from '../../API/ConnectAPI'
+import { checkTimeOutToken } from '../../API/AxiosAPI'
 
 
 function Films(props: any) {

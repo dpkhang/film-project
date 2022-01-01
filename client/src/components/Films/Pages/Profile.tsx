@@ -3,7 +3,7 @@ import UpdateProfile from '../Partials/Profile/UpdateProfile/UpdateProfile'
 import Frame from '../Partials/Profile/Frame/Frame'
 import {useNavigate} from 'react-router-dom'
 import {useCookies} from 'react-cookie'
-import {getUserById} from '../../../API/ConnectAPI'
+import {getUserById} from '../../../API/AxiosAPI'
 import './Profile.scss'
 
 function Profile(props: any) {

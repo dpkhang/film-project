@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect,  useState} from 'react'
 import './Search.scss'
 import $ from 'jquery'
 import Dialog from '../../Dialog/Alert'
-import { verifyEmail } from '../../../API/ConnectAPI'
+import { verifyEmail } from '../../../API/AxiosAPI'
 import Loading from '../../Loading/Loading';
 import { useNavigate } from 'react-router-dom'
+import { listenSocket } from '../../../API/SocketIO';
 
 Search.propTypes = {
     
@@ -26,6 +27,13 @@ function Search() {
 
     //hook
     const navigate = useNavigate()
+
+    listenSocket('register-socket-sender').then(data=>{
+        console.log(data)
+        if(typeof data === 'string') {
+            navigate(`/register/${data}`)
+        }
+    }).catch(err=>{})
 
     useEffect(()=>{
         setTimeout(()=>{

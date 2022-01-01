@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import $ from 'jquery'
 import './UpdateFrame.scss'
-import { putUser } from '../../../../../../API/ConnectAPI'
+import { putUser } from '../../../../../../API/AxiosAPI'
 import Cookies from 'universal-cookie'
 import Dialog from '../../../../../Dialog/Alert'
 
